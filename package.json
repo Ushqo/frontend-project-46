@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Compares two configuration files and shows a difference",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,6 +13,9 @@
   },
   "author": "Ushakov Dmitriy",
   "license": "ISC",
+  "bin": {
+    "gen-diff": "bin/gendiff.js"
+  },
   "bugs": {
     "url": "https://github.com/Ushqo/frontend-project-46/issues"
   },
