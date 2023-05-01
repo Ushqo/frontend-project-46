@@ -15,13 +15,13 @@ $ node --version
 ## Installation
 
 ```sh
-$ npm install brain-games
+$ npm install gendiff
 ```
 
 ## Launch
 
 ```sh
-$ gendiff *path1* *path2*
+$ gendiff _path1_ _path2_
 ```
 
 [![asciicast](https://asciinema.org/a/yGJZSTSpkxOZBAZlHF4ltdxOU.svg)](https://asciinema.org/a/yGJZSTSpkxOZBAZlHF4ltdxOU?t=0,02)
