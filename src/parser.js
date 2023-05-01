@@ -5,4 +5,4 @@ export default (data, format) => {
     default:
       throw new Error('Unknow data format!');
   }
-}
+};
