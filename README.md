@@ -2,8 +2,7 @@
 
 [![Actions Status](https://github.com/Ushqo/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Ushqo/frontend-project-46/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/78ccf0cf0d80e192c44f/maintainability)](https://codeclimate.com/github/Ushqo/frontend-project-46/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/39883ad115954a7af4ac/test_coverage)](https://codeclimate.com/github/Ushqo/frontend-project-44/test_coverage)
-
+[![Test Coverage](https://api.codeclimate.com/v1/badges/78ccf0cf0d80e192c44f/test_coverage)](https://codeclimate.com/github/Ushqo/frontend-project-46/test_coverage)
 ## Description
 
 ## Requirements for the working environment
