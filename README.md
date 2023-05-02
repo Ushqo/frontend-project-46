@@ -1,7 +1,6 @@
 # gendiff.js
 
 [![Actions Status](https://github.com/Ushqo/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Ushqo/frontend-project-46/actions)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/78ccf0cf0d80e192c44f/maintainability)](https://codeclimate.com/github/Ushqo/frontend-project-46/maintainability)
 
 ## Description
