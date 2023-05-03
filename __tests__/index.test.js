@@ -16,3 +16,13 @@ test('compare json files', () => {
 
   expect(actual).toEqual(expected);
 });
+
+test('compare yaml files', () => {
+  const fileToCompare1 = getFixturePath('file1.yml');
+  const fileToCompare2 = getFixturePath('file2.yml');
+
+  const actual = genDiff(fileToCompare1, fileToCompare2);
+  const expected = '{\n  - follow: false\n    host: hexlet.io\n  - proxy: 123.234.53.22\n  - timeout: 50\n  + timeout: 20\n  + verbose: true\n}';
+
+  expect(actual).toEqual(expected);
+});
