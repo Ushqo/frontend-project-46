@@ -22,7 +22,7 @@ $ npm install gendiff
 ## Launch
 
 ```sh
-$ gendiff _path1_ _path2_
+$ gendiff path1 path2
 ```
 
 [![asciicast](https://asciinema.org/a/yGJZSTSpkxOZBAZlHF4ltdxOU.svg)](https://asciinema.org/a/yGJZSTSpkxOZBAZlHF4ltdxOU?t=0,02)
