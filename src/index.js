@@ -1,7 +1,7 @@
 import path from 'path';
 import { readFileSync } from 'node:fs';
 import getParsedData from './parser.js';
-import getFormatedData from './formaters/index.js';
+import getFormatedData from './formatters/index.js';
 
 const getFileData = (filePath) => readFileSync(path.normalize(filePath));
 
