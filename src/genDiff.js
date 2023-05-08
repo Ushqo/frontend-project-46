@@ -1,30 +1,41 @@
 import _ from 'lodash';
 
-export default (obj1, obj2) => {
-  const keys1 = Object.keys(obj1);
-  const keys2 = Object.keys(obj2);
-
-  const keys = _.sortBy(_.union(keys1, keys2));
-
-  const getDiffData = (acc, key) => {
-    let string = acc;
-    if (!Object.hasOwn(obj1, key)) {
-      string += `  + ${key}: ${obj2[key]}\n`;
-      return string;
+const genDiff = (obj1, obj2) => _.sortBy(_.union(Object.keys(obj1), Object.keys(obj2)))
+  .map((key) => {
+    if (_.isObject(obj1[key]) && _.isObject(obj2[key])) {
+      return {
+        key,
+        status: 'tree',
+        children: genDiff(obj1[key], obj2[key]),
+      };
     }
-    if (!Object.hasOwn(obj2, key)) {
-      string += `  - ${key}: ${obj1[key]}\n`;
-      return string;
+    if (!Object.hasOwn(obj1, key) && Object.hasOwn(obj2, key)) {
+      return {
+        key,
+        status: 'added',
+        value: obj2[key],
+      };
     }
-    if (obj1[key] !== obj2[key]) {
-      string += `  - ${key}: ${obj1[key]}\n`;
-      string += `  + ${key}: ${obj2[key]}\n`;
-      return string;
+    if (Object.hasOwn(obj1, key) && !Object.hasOwn(obj2, key)) {
+      return {
+        key,
+        status: 'removed',
+        value: obj1[key],
+      };
     }
-    string += `    ${key}: ${obj1[key]}\n`;
-    return string;
-  };
+    if ((obj1[key] !== obj2[key])) {
+      return {
+        key,
+        status: 'updated',
+        newValue: obj2[key],
+        oldValue: obj1[key],
+      };
+    }
+    return {
+      key,
+      status: 'not updated',
+      value: obj1[key],
+    };
+  });
 
-  const result = keys.reduce(getDiffData, '');
-  return `{\n${result}}`;
-};
+export default genDiff;
