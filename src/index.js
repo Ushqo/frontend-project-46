@@ -7,7 +7,7 @@ const getFileData = (filePath) => readFileSync(path.normalize(filePath));
 
 const getExtension = (filePath) => path.extname(path.basename(filePath));
 
-export default (filePath1, filePath2, formater = 'stylish') => {
+export default (filePath1, filePath2, formatter = 'stylish') => {
   const firstFileData = getFileData(filePath1);
   const secondFileData = getFileData(filePath2);
 
@@ -17,5 +17,5 @@ export default (filePath1, filePath2, formater = 'stylish') => {
   const firstFileParsedData = getParsedData(firstFileData, firstFileExtension);
   const secondFileParsedData = getParsedData(secondFileData, secondFileExtension);
 
-  return getFormatedData(firstFileParsedData, secondFileParsedData, formater);
+  return getFormatedData(firstFileParsedData, secondFileParsedData, formatter);
 };

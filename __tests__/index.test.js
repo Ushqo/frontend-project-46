@@ -48,3 +48,23 @@ test('compare yaml files with plain formatter', () => {
 
   expect(actual).toEqual(expected);
 });
+
+test('compare json files with json formatter', () => {
+  const pathTofileToCompare1 = getFixturePath('file1.json');
+  const pathTofileToCompare2 = getFixturePath('file2.json');
+
+  const actual = genDiff(pathTofileToCompare1, pathTofileToCompare2, 'json');
+  const expected = getExpected('result-json.txt');
+
+  expect(actual).toEqual(expected);
+});
+
+test('compare yaml files with json formatter', () => {
+  const pathTofileToCompare1 = getFixturePath('file1.yml');
+  const pathTofileToCompare2 = getFixturePath('file2.yml');
+
+  const actual = genDiff(pathTofileToCompare1, pathTofileToCompare2, 'json');
+  const expected = getExpected('result-json.txt');
+
+  expect(actual).toEqual(expected);
+});
