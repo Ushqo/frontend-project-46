@@ -28,12 +28,6 @@ $ npm ci
 
 ## Examples
 
-```sh
-$ gendiff pathToFile1 pathToFile2
-```
-
-## Examples
-
 ### stylish formatter (default)
 
 ```sh
