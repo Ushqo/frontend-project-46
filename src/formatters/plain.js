@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const convertValToStr = (value) => {
+const stringify = (value) => {
   if (typeof value === 'string') {
     return `'${value}'`;
   }
@@ -10,23 +10,23 @@ const convertValToStr = (value) => {
 const plain = (diffirence) => {
   const iter = (propertyValue, propertyName = '') => {
     const result = propertyValue.flatMap((element) => {
-      switch (element.status) {
-        case 'tree':
+      switch (element.type) {
+        case 'nested':
           return iter(element.children, `${propertyName + element.key}.`);
         case 'added':
-          return `Property '${propertyName + element.key}' was added with value: ${convertValToStr(element.value)}`;
+          return `Property '${propertyName + element.key}' was added with value: ${stringify(element.value)}`;
         case 'removed':
           return `Property '${propertyName + element.key}' was removed`;
         case 'updated':
-          return `Property '${propertyName + element.key}' was updated. From ${convertValToStr(element.oldValue)} to ${convertValToStr(element.newValue)}`;
-        case 'not updated':
-          return [];
+          return `Property '${propertyName + element.key}' was updated. From ${stringify(element.value1)} to ${stringify(element.value2)}`;
+        case 'notUpdated':
+          return null;
         default:
-          throw new Error(`Unnown status: ${propertyValue.status}\n`);
+          throw new Error(`Unknown type: ${propertyValue.type}`);
       }
     });
 
-    return result.join('\n');
+    return result.filter((element) => element !== null).join('\n');
   };
 
   return iter(diffirence);

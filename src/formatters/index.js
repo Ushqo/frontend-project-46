@@ -3,17 +3,20 @@ import plain from './plain.js';
 import stylish from './stylish.js';
 import json from './json.js';
 
-export default (firstFile, secondFile, format) => {
-  const difference = genDiff(firstFile, secondFile);
-
+const getFormatter = (format, data) => {
   switch (format) {
     case 'stylish':
-      return stylish(difference);
+      return stylish(data);
     case 'plain':
-      return plain(difference);
+      return plain(data);
     case 'json':
-      return json(difference);
+      return json(data);
     default:
-      throw new Error(`Unnown format: ${format}`);
+      throw new Error(`Unknown format: ${format}`);
   }
+};
+
+export default (file1, file2, format) => {
+  const difference = genDiff(file1, file2);
+  return getFormatter(format, difference);
 };
