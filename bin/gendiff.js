@@ -12,7 +12,6 @@ program
   .arguments('<filepath1> <filepath2>')
   .addOption(new Option('-f, --format <type>', 'output format').default('stylish', 'stylish'))
   .action((filePath1, filePath2) => {
-    // console.log(JSON.stringify(getDiff(filePath1, filePath2)));
     console.log(getDiff(filePath1, filePath2, program.opts().format));
   });
 
