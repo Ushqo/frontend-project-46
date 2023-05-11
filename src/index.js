@@ -5,17 +5,17 @@ import getFormatedData from './formatters/index.js';
 
 const getFileData = (filePath) => readFileSync(path.normalize(filePath));
 
-const getExtension = (filePath) => path.extname(path.basename(filePath));
+const getExtension = (filePath) => path.extname(path.basename(filePath)).slice(1);
 
 export default (filePath1, filePath2, formatter = 'stylish') => {
-  const firstFileData = getFileData(filePath1);
-  const secondFileData = getFileData(filePath2);
+  const data1 = getFileData(filePath1);
+  const data2 = getFileData(filePath2);
 
-  const firstFileExtension = getExtension(filePath1);
-  const secondFileExtension = getExtension(filePath2);
+  const extension1 = getExtension(filePath1);
+  const extension2 = getExtension(filePath2);
 
-  const firstFileParsedData = getParsedData(firstFileData, firstFileExtension);
-  const secondFileParsedData = getParsedData(secondFileData, secondFileExtension);
+  const parsedData1 = getParsedData(data1, extension1);
+  const parsedData2 = getParsedData(data2, extension2);
 
-  return getFormatedData(firstFileParsedData, secondFileParsedData, formatter);
+  return getFormatedData(parsedData1, parsedData2, formatter);
 };
