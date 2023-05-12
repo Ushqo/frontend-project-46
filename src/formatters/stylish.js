@@ -19,7 +19,10 @@ const getTypeSymbol = (type) => {
 
 const getResultLine = (lines, bracketIndent) => ['{', ...lines, `${bracketIndent}}`].join('\n');
 
-const getStructure = (data, IncDepth, replacer = ' ', spaceCount = 4) => {
+const stringify = (data, IncDepth) => {
+  const replacer = ' ';
+  const spaceCount = 4;
+
   const iter = (node, depthCount) => {
     if (!_.isObject(node)) {
       return `${node}`;
@@ -38,24 +41,9 @@ const getStructure = (data, IncDepth, replacer = ' ', spaceCount = 4) => {
   return iter(data, IncDepth);
 };
 
-const stringifyKey = (node, currentIndent) => {
-  if (node.type === 'updated') {
-    return `${currentIndent}${getTypeSymbol(node.type)[0]}${node.key}`;
-  }
-  return `${currentIndent}${getTypeSymbol(node.type)}${node.key}`;
-};
-
-const stringifyValue = (node, depthCount, currentIndent) => {
-  if (node.type === 'updated') {
-    return `${getStructure(node.value1, depthCount + 1)}\n${currentIndent}${getTypeSymbol(node.type)[1]}${node.key}: ${getStructure(node.value2, depthCount + 1)}`;
-  }
-  return `${getStructure(node.value, depthCount + 1)}`;
-};
-
-const stylish = (data, replacer = ' ', spaceCount = 4) => {
-  if (!_.isObject(data)) {
-    return `${data}`;
-  }
+const stylish = (data) => {
+  const replacer = ' ';
+  const spaceCount = 4;
 
   const iter = (currentValue, depthCount = 1) => {
     const indentSize = depthCount * spaceCount - 2;
@@ -65,15 +53,15 @@ const stylish = (data, replacer = ' ', spaceCount = 4) => {
     const lines = currentValue.map((node) => {
       switch (node.type) {
         case 'nested':
-          return `${stringifyKey(node, currentIndent)}: ${iter(node.children, depthCount + 1)}`;
+          return `${currentIndent}${getTypeSymbol(node.type)}${node.key}: ${iter(node.children, depthCount + 1)}`;
         case 'updated':
-          return `${stringifyKey(node, currentIndent)}: ${stringifyValue(node, depthCount, currentIndent)}`;
+          return `${currentIndent}${getTypeSymbol(node.type)[0]}${node.key}: ${stringify(node.value1, depthCount + 1)}\n${currentIndent}${getTypeSymbol(node.type)[1]}${node.key}: ${stringify(node.value2, depthCount + 1)}`;
         case 'removed':
-          return `${stringifyKey(node, currentIndent)}: ${stringifyValue(node, depthCount)}`;
+          return `${currentIndent}${getTypeSymbol(node.type)}${node.key}: ${stringify(node.value, depthCount + 1)}`;
         case 'added':
-          return `${stringifyKey(node, currentIndent)}: ${stringifyValue(node, depthCount)}`;
+          return `${currentIndent}${getTypeSymbol(node.type)}${node.key}: ${stringify(node.value, depthCount + 1)}`;
         case 'notUpdated':
-          return `${stringifyKey(node, currentIndent)}: ${stringifyValue(node, depthCount)}`;
+          return `${currentIndent}${getTypeSymbol(node.type)}${node.key}: ${stringify(node.value, depthCount + 1)}`;
         default:
           throw new Error(`Unknown type: ${node.type}`);
       }
