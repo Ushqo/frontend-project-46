@@ -7,7 +7,7 @@ const genDiff = (data1, data2) => {
   const uniqueKeys = _.union(dataKeys1, dataKeys2);
   const sortedKeys = _.sortBy(uniqueKeys);
 
-  const difference = sortedKeys.map((key) => {
+  const dataDifference = sortedKeys.map((key) => {
     if (_.isObject(data1[key]) && _.isObject(data2[key])) {
       return { key, type: 'nested', children: genDiff(data1[key], data2[key]) };
     }
@@ -25,7 +25,7 @@ const genDiff = (data1, data2) => {
     return { key, type: 'notUpdated', value: data1[key] };
   });
 
-  return difference;
+  return dataDifference;
 };
 
 export default genDiff;

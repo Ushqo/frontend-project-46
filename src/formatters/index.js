@@ -1,9 +1,8 @@
-import genDiff from '../genDiff.js';
 import plain from './plain.js';
 import stylish from './stylish.js';
 
-const getFormatter = (format, data) => {
-  switch (format) {
+const format = (data, type) => {
+  switch (type) {
     case 'stylish':
       return stylish(data);
     case 'plain':
@@ -15,7 +14,4 @@ const getFormatter = (format, data) => {
   }
 };
 
-export default (file1, file2, format) => {
-  const difference = genDiff(file1, file2);
-  return getFormatter(format, difference);
-};
+export default format;
